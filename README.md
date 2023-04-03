@@ -1,5 +1,6 @@
 * brew install docker --cask
-* docker-compose up --build -d
+* docker-compose up --build -d --remove-orphans
+* docker-compose -f manga-downloader.yml up --build -d --remove-orphans
 * Hardlinks - https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/
 
 # Setup

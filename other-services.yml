@@ -1,0 +1,37 @@
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+    volumes:
+      - ${ConfigPath}/jackett:/config
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+
+
+  kavita:
+    image: kizaing/kavita:latest
+    container_name: kavita
+    volumes:
+        - ${MediaPath}/data/media/comics:/manga
+        - ${ConfigPath}/kavita:/kavita/config
+    ports:
+        - 5001:5000
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
+    volumes:
+      - ${ConfigPath}/readarr:/config
+      - ${MediaPath}/data:/data
+    ports:
+      - 8787:8787
+    restart: unless-stopped

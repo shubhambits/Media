@@ -66,22 +66,21 @@ services:
       - app-network
     restart: unless-stopped
 
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    # network_mode: host
-    ports:
-      - 32400:32400
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Asia/Kolkata
-      - VERSION=docker
+      - TZ=Etc/UTC
     volumes:
-      - ${ConfigPath}/plexserver:/config
-      - ${MediaPath}/data/media/tv:/tv
-      - ${MediaPath}/data/media/movies:/movies
+      - ${ConfigPath}/jellyfin:/config
+      - ${MediaPath}/data/media/tv:/data/tvshows
+      - ${MediaPath}/data/media/movies:/data/movies
+    ports:
+      - 8096:8096
     restart: unless-stopped
+
 networks:
   app-network: 
     driver: bridge
