@@ -19,3 +19,7 @@ docker-compose pull
 docker-compose up --build -d --remove-orphans
 <!-- Delete unused images -->
 docker system prune
+
+
+#vpn details
+https://github.com/navilg/media-stack
