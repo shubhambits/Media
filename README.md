@@ -2,8 +2,7 @@
 * docker-compose up --build -d --remove-orphans
 * docker-compose -f manga-downloader.yml up --build -d --remove-orphans
 * Hardlinks - https://trash-guides.info/Hardlinks/Hardlinks-and-Instant-Moves/
-* https://github.com/avalonv/reCBZ/
-recbz --epub -p PW3 --force --join *.cbz  
+
 
 # Setup
 1. change the default save path in qbit settings to - "/data/download"
@@ -20,6 +19,8 @@ docker-compose up --build -d --remove-orphans
 <!-- Delete unused images -->
 docker system prune
 
+<!-- create network: -->
+docker network create mynetwork
 
 #vpn details
 https://github.com/navilg/media-stack

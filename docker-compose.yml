@@ -23,17 +23,17 @@ services:
       - NET_ADMIN
     environment:
       - VPN_SERVICE_PROVIDER=protonvpn # Valid values: nordvpn, expressvpn, protonvpn, surfshark or custom
-      - OPENVPN_USER=UbMXqF41SqkVqTrV
-      - OPENVPN_PASSWORD=VTCg3cE81j1iANrDkbNFKXAUdpeZ0HcK
-      - SERVER_COUNTRIES=Japan
+      - OPENVPN_USER=
+      - OPENVPN_PASSWORD=
+      - SERVER_COUNTRIES=Netherlands
       - FREE_ONLY=on  # Valid with protonvpn only. Value willbe set "on" if using free subscription provided by protonvpn
     networks:
       - mynetwork
     ports:
       # qbittorrent ports
-      - 5080:5080
-      - 6881:6881
-      - 6881:6881/udp
+      # - 5080:5080
+      # - 6881:6881
+      # - 6881:6881/udp
       # prowlarr ports
       - 9696:9696 
 
@@ -73,7 +73,7 @@ services:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
     depends_on:               
-      - vpn                   
+      - vpn
     network_mode: service:vpn 
     environment:
       - PUID=1000
@@ -87,10 +87,10 @@ services:
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    network_mode: service:vpn
+    # network_mode: service:vpn
     container_name: qbittorrent
-    depends_on:
-      - vpn        
+    # depends_on:
+    #   - vpn        
     environment:
       - PUID=1000
       - PGID=1000
@@ -99,17 +99,17 @@ services:
     volumes:
       - ${ConfigPath}/qbittorrent:/config
       - ${MediaPath}/data/download:/data/download
-    # ports:
-    #   - 5080:5080
-    #   - 6881:6881
-    #   - 6881:6881/udp
+    ports:
+      - 5080:5080
+      - 6881:6881
+      - 6881:6881/udp
     restart: unless-stopped
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     networks:
-      - mynetwork    
+      - mynetwork
     environment:
       - PUID=1000
       - PGID=1000
@@ -153,4 +153,4 @@ networks:
 
 volumes:
   nginx-config:
-  letsencrypt:    
+  letsencrypt:
