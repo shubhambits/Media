@@ -12,14 +12,14 @@
 
 
 # Update images
-<!-- Pull images -->
+## Pull images
 docker-compose pull
-<!-- Recreate container -->
+## Recreate container
 docker-compose up --build -d --remove-orphans
-<!-- Delete unused images -->
+## Delete unused images
 docker system prune
 
-<!-- create network: -->
+# create network:
 docker network create mynetwork
 
 #vpn details
